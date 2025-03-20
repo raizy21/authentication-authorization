@@ -1,25 +1,39 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useState } from 'react'; // import useState from react
+import { Link } from 'react-router-dom';  // import Link from react-router-dom
+import { toast } from 'react-toastify';   // import toast from react-toastify
 
 const Login = () => {
+  // set State for email and password using useState hook
   const [{ email, password }, setForm] = useState({
     email: '',
     password: ''
   });
+  // set State for loading using useState hook
   const [loading, setLoading] = useState(false);
 
+  // handleChange function to update the state of email and password when the user types in the input fields
+  // It takes an event object as an argument and updates the state using the setForm function
   const handleChange = e => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
 
+  // handleSubmit function to handle the form submission when the user clicks the submit button
   const handleSubmit = async e => {
+
     try {
+      // preventDefault is a method that prevents the default behavior of the form submission
       e.preventDefault();
+
+      // check if all fields are filled and throw an error if any field is empty
       if (!email || !password) throw new Error('All fields are required');
+      // setLoading to true to indicate that the form submission is in progress
       setLoading(true);
+      // console.log is used to log the email and password to the console for debugging purposes
       console.log(email, password);
+
     } catch (error) {
+      // catch any error that occurs during the form submission t
       toast.error(error.message);
     } finally {
+      // setLoading to false to indicate that the form submission is complete
       setLoading(false);
     }
   };

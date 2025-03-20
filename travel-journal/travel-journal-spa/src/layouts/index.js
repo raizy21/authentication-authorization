@@ -1,3 +1,3 @@
-import RootLayout from './RootLayout';
+import RootLayout from "./RootLayout"; // Importing RootLayout from RootLayout.js file
 
-export { RootLayout };
+export { RootLayout }; // Exporting RootLayout as a named export

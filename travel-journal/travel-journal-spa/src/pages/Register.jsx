@@ -1,8 +1,11 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useState } from 'react';  // import useState from react
+import { Link } from 'react-router-dom';    // import Link from react-router-dom
+import { toast } from 'react-toastify';   // import toast from react-toastify
 
 const Register = () => {
+  // useState is a hook that lets you add state to your functional components
+  // It takes an initial state and returns an array of two elements: the current state and a function to update it
+  // The initial state is an object with five properties: firstName, lastName, email, password, and confirmPassword
   const [{ firstName, lastName, email, password, confirmPassword }, setForm] = useState({
     firstName: '',
     lastName: '',
@@ -10,21 +13,37 @@ const Register = () => {
     password: '',
     confirmPassword: ''
   });
+  // loading is state variable that indicates whether the form is being submitted or not
   const [loading, setLoading] = useState(false);
 
+  // handleChange is a function that updates the state of the form when the user types in the input fields
+  // It takes an event object as an argument and updates the state using the setForm function
   const handleChange = e => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
 
+  // handleSubmit is a function that handles the form submission when the user clicks the submit button
+  // It takes an event object as an argument and prevents the default behavior of the form submission
+  // It checks if all fields are filled and throws an error if any field is empty
   const handleSubmit = async e => {
     try {
+      // preventDefault is a method that prevents the default behavior of the form submission
       e.preventDefault();
+
+      // check if all fields are filled and throw an error if any field is empty
       if (!firstName || !lastName || !email || !password || !confirmPassword)
         throw new Error('All fields are required');
+      //check if password and confirmPassword match and throw an error if they do not
       if (password !== confirmPassword) throw new Error('Passwords do not match');
+      // setLoading to true to indicate that the form submission is in progress
       setLoading(true);
+      // console.log is used to log the form data to the console for debugging purposes
       console.log(firstName, lastName, email, password, confirmPassword);
+
     } catch (error) {
+      // catch any error that occurs during the form submission and display it using toast
       toast.error(error.message);
     } finally {
+
+      // setLoading to false to indicate that the form submission is complete
       setLoading(false);
     }
   };
